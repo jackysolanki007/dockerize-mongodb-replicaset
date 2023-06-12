@@ -18,3 +18,19 @@ The "dockerize-mongodb-replicaset" project typically consists of the following c
 By following the instructions provided in the "dockerize-mongodb-replicaset" project, you can easily create a replica set configuration for MongoDB using Docker containers. This setup allows you to quickly deploy and manage a highly available and fault-tolerant MongoDB cluster.
 
 Please note that the specific implementation details and steps may vary depending on the project or tutorial you are following. It's recommended to refer to the documentation or instructions provided with the "dockerize-mongodb-replicaset" project for the most accurate and up-to-date information on how to set up the MongoDB replica set using Docker.
+
+
+Follow Below Steps To Configure MongoDB replicaset.
+
+1) First create a docker network for this environment.
+```
+sudo docker network create mongo-docker-network
+```
+
+2) For setup we have to create mongodb.keyfile first.Below i metioned command that will create file.                                                                   
+```
+    cd data/mongo
+    openssl rand -base64 768 > mongo.keyfile
+    sudo chown 999:999 mongo.keyfile
+    sudo chmod 400 mongo.keyfile
+```

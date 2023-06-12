@@ -35,7 +35,7 @@ sudo chown 999:999 mongo.keyfile
 sudo chmod 400 mongo.keyfile
 ```
 
-3)  Verify if all the containers are running. Use the command below.
+3) Verify if all the containers are running. Use the command below.
 ```
 sudo docker ps
 ```
@@ -45,7 +45,7 @@ sudo docker ps
 sudo docker exec mongo1 /data/rs-init.sh
 ```
 
-5)For subsequent runs, you only need to execute two commands:
+5) For subsequent runs, you only need to execute two commands:
 ```
 sudo docker-compose up
 sudo docker-compose down

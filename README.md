@@ -22,15 +22,31 @@ Please note that the specific implementation details and steps may vary dependin
 
 Follow Below Steps To Configure MongoDB replicaset.
 
-1) First create a docker network for this environment.
+1) Create a Docker network for the environment.
 ```
 sudo docker network create mongo-docker-network
 ```
 
-2) For setup we have to create mongodb.keyfile first.Below i metioned command that will create file.                                                                   
+2) Generate the MongoDB keyfile. Run the following commands to create the file.                                                                   
 ```
 cd data/mongo
 openssl rand -base64 768 > mongo.keyfile
 sudo chown 999:999 mongo.keyfile
 sudo chmod 400 mongo.keyfile
+```
+
+3)  Verify if all the containers are running. Use the command below.
+```
+sudo docker ps
+```
+
+4) If all the containers are running, you need to run the following command only once to set up the replica set. It is important to note that this command should be executed only once.
+```
+sudo docker exec mongo1 /data/rs-init.sh
+```
+
+5)For subsequent runs, you only need to execute two commands:
+```
+sudo docker-compose up
+sudo docker-compose down
 ```

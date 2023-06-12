@@ -1,0 +1,69 @@
+version: "3.7"
+
+services:
+
+  mongo1:
+    container_name: mongo1
+    image: mongo:4.4
+    volumes:
+      - ./data/mongo1:/data/db
+      - ./data/mongo/mongo.keyfile:/data/mongo.keyfile
+      - ./data/mongo/rs-init.sh:/data/rs-init.sh
+    networks:
+      - mongo-docker-network
+    ports:
+      - "27017:27017"
+    links:
+      - mongo2
+      - mongo3
+    environment:
+      - MONGO_INITDB_DATABASE=admin
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+      - MONGO_USERNAME=admin
+      - MONGO_PASSWORD=admin
+    command: ["mongod","--bind_ip","mongo1","--replSet","rs0","--keyFile","/data/mongo.keyfile"]
+
+
+  mongo2:
+    container_name: mongo2
+    image: mongo:4.4
+    volumes:
+      - ./data/mongo2:/data/db
+      - ./data/mongo/mongo.keyfile:/data/mongo.keyfile
+    networks:
+      - mongo-docker-network
+    expose:
+      - "27017"
+    environment:
+      - MONGO_INITDB_DATABASE=admin
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+      - MONGO_USERNAME=admin
+      - MONGO_PASSWORD=admin
+    command: ["mongod","--bind_ip","mongo2","--replSet","rs0","--keyFile","/data/mongo.keyfile"]
+
+  mongo3:
+    container_name: mongo3
+    image: mongo:4.4
+    volumes:
+      - ./data/mongo3:/data/db
+      - ./data/mongo/mongo.keyfile:/data/mongo.keyfile
+    networks:
+      - mongo-docker-network
+    expose:
+      - "27017"
+    environment:
+      - MONGO_INITDB_DATABASE=admin
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+      - MONGO_USERNAME=admin
+      - MONGO_PASSWORD=admin
+    command: ["mongod","--bind_ip","mongo3","--replSet","rs0","--keyFile","/data/mongo.keyfile"]
+
+
+networks:
+  mongo-docker-network:
+    driver: bridge
+    name: mongo-docker-network
+    external: true

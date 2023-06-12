@@ -29,8 +29,8 @@ sudo docker network create mongo-docker-network
 
 2) For setup we have to create mongodb.keyfile first.Below i metioned command that will create file.                                                                   
 ```
-    cd data/mongo
-    openssl rand -base64 768 > mongo.keyfile
-    sudo chown 999:999 mongo.keyfile
-    sudo chmod 400 mongo.keyfile
+cd data/mongo
+openssl rand -base64 768 > mongo.keyfile
+sudo chown 999:999 mongo.keyfile
+sudo chmod 400 mongo.keyfile
 ```

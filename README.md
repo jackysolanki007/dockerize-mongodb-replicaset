@@ -34,18 +34,22 @@ openssl rand -base64 768 > mongo.keyfile
 sudo chown 999:999 mongo.keyfile
 sudo chmod 400 mongo.keyfile
 ```
+3) Now start all the container using below command.
+```
+sudo docker-compose up -d
+```
 
-3) Verify if all the containers are running. Use the command below.
+4) Verify if all the containers are running. Use the command below.
 ```
 sudo docker ps
 ```
 
-4) If all the containers are running, you need to run the following command only once to set up the replica set. It is important to note that this command should be executed only once.
+5) If all the containers are running, you need to run the following command only once to set up the replica set. It is important to note that this command should be executed only once.
 ```
 sudo docker exec mongo1 /data/rs-init.sh
 ```
 
-5) For subsequent runs, you only need to execute two commands:
+6) For subsequent runs, you only need to execute two commands:
 ```
 sudo docker-compose up
 sudo docker-compose down
